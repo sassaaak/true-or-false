@@ -39,7 +39,7 @@
       //json取得しテキスト変換
 
       function jsonText(num) {
-        let requestURL = "/data.json";　//jsonのURLを変数に代入
+        let requestURL = "https://raw.githubusercontent.com/sassaaak/true-or-false/main/data.json";　//jsonのURLを変数に代入
         let request = new XMLHttpRequest();　//HTTPリクエストを作成
         request.open('GET', requestURL);　//新しいリクエストを開始
         request.responseType = 'text';　//XHRオブジェクトがサーバーから返されるデータを判断できるようにSONを指定
