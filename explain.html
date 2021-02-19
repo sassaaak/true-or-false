@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>LSAFit | カルチャーフィット診断で採用のミスマッチを防ぐ</title>
+  </head>
+  <body>
+    <section class="jumbotron">
+      <div class="container">
+        <h1 class="text-center h2">お皿を割ったら罰金を払わなくてはいけない？</h1>
+        <p class="lead">あなたの回答: ○</p>
+        <p class="lead">正当例: ×</p>
+        <p class="lead text-muted">解説：「予め損害賠償額を決める労働契約」は労働基準法で禁止されているので、このようなルールは無効です。 ただし、このような社内ルールの有無に関わらず、あまりにひどい過失や故意で会社に損害を与えた場合は、
+          実際の損害額と本人の責任の度合いに応じて、損害を賠償しなければならない場合もあります</p>
+        <div class="text-center">
+          <div class="btn btn-primary btn-lg">次の質問へ</div>
+        </div>
+      </div>
+    </section>
+    
+    <script type="text/javascript">
+    //パラメータ取得し配列に収納
+    let getParam = location.search;
+    let splitParam = document.location.search.split("&");
+    let paramstr = [];
+    for (let i = 1; i < 8 ;i++){
+      paramstr[i] = splitParam[splitParam.length,i-1];
+    }
+    let nextParam = getParam.slice(8);//回答パラメータ
+    //クラス取得
+    let NextPage = document.getElementsByClassName("btn btn-primary btn-lg")[0];
+    let Question = document.getElementsByClassName("text-center h2")[0];
+    let Commentary = document.getElementsByClassName("lead text-muted")[0];
+    let CorporateAnswer = document.getElementsByClassName("lead")[1];
+    let yourAnswer = document.getElementsByClassName("lead")[0];
+    //回答テキスト変換
+    const ansCross = () => {
+      yourAnswer.innerHTML = "あなたの回答:×";
+    };
+    const ansCircle = () => {
+      yourAnswer.innerHTML = "あなたの回答:◯";
+    };
+    //json取得し、テキスト変換
+    function jsonText(num) {
+      var requestURL = "./data.json";　//jsonのURLを変数に代入
+      var request = new XMLHttpRequest();　//HTTPリクエストを作成
+      request.open('GET', requestURL);　//新しいリクエストを開始
+      request.responseType = 'text';　//XHRオブジェクトがサーバーから返されるデータを判断できるようにSONを指定
+      request.send();　//リクエストを返信
+      request.onload = () => {
+        var DataText =request.response;
+        var Data = JSON.parse(DataText);
+        Question.innerHTML = Data["questions"][num]["question"];
+        Commentary.innerHTML = `解説:${Data["questions"][num]["explanation"]}`;
+        if(Data["questions"][num]["corporate_answer"] === true){
+          CorporateAnswer.innerHTML = "正当例:◯";
+        }else{
+          CorporateAnswer.innerHTML = "正当例:×";
+        }
+      }
+    };
+    //ページ遷移とパラメータ設定
+    function changePage(p) {
+      NextPage.onclick = ()=>{
+        document.location.href = "./answer.html"+`?page=${p}`+"&"+nextParam;
+      };
+    };
+    //最終質問時のパラメータ設定とテキスト変換
+    function changeSummary(s) {
+      NextPage.innerHTML = "結果を見る"
+      NextPage.onclick = ()=>{
+        document.location.href = "./summary.html"+`?page=${s}`+"&"+nextParam;
+      };
+    };
+    //回答変換
+    function answers(a) {
+      if(paramstr[a] === "true") {
+        ansCircle();
+      }else {
+        ansCross();
+      }
+    };
+    //ページごと、json表示、画面遷移設定（ページ１の時だけjson表示なし)
+    for(let n = 2 ;n <= 6 ;n++){
+      if(paramstr[1] === `?page=${[n-1]}`){
+        answers(n);
+        changePage(n);
+      }else if(paramstr[1] === `?page=${[n]}`){
+        answers(n+1);
+        jsonText(n-2);
+        changePage(n+1);
+      }else if(paramstr[1] === `?page=${[n+5]}`){
+        answers(n+2);
+        jsonText(n-1);
+        changeSummary(n+2);  
+      }
+    }
+    </script>
+  </body>
+</html>
