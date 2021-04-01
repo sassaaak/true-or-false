@@ -27,17 +27,22 @@
           </thead>
           <tbody>
             <tr>
+              <th scope="row">お皿を割っってしまったらその金額を払わなくてはいけない？</th>
+              <td class="td_1">○</td>
+              <td class="td_2">×</td>
+            </tr>
+            <tr>
               <th scope="row">労働条件を詳しく説明してもらう必要がある</th>
               <td class="td_1">○</td>
               <td class="td_2">×</td>
             </tr>
             <tr>
-              <th scope="row">6時間以上働いたが休憩は取らなくていい</th>
+              <th scope="row">7時間働いたが休憩は取らなくていい</th>
               <td class="td_1">○</td>
               <td class="td_2">○</td>
             </tr>
             <tr>
-              <th scope="row">急にやめたら、給料の支払いが拒否された</th>
+              <th scope="row">急にやめたので給料は支払ってもらえない</th>
               <td class="td_1">×</td>
               <td class="td_2">×</td>
             </tr>
@@ -47,24 +52,24 @@
               <td class="td_2">×</td>
             </tr>
             <tr>
-              <th scope="row">アルバイトに年次有給休暇はない</th>
+              <th scope="row">アルバイトは有給休暇がない</th>
               <td class="td_1">○</td>
               <td class="td_2">×</td>
             </tr>
             <tr>
-              <th scope="row">破損などで商品の買取を強制されたら買わなくてはいけない</th>
+              <th scope="row">店長は売れ残りの買取をアルバイトへ強制できる</th>
               <td class="td_1">○</td>
               <td class="td_2">×</td>
             </tr>
             <tr>
-              <th scope="row">アルバイトでも、残業手当がある</th>
+              <th scope="row">アルバイトにも残業手当がでる/th>
               <td class="td_1">○</td>
               <td class="td_2">×</td>
             </tr>
           </tbody>
         </table>
         <div class="text-center">
-          <a href="#" class="btn btn-primary btn-lg">もう一度挑戦する</a>
+          <a href="#" class="btn btn-primary btn-lg"　onclick="frameClick();">もう一度挑戦する</a>
         </div>
       </div>
     </section>
@@ -101,6 +106,10 @@
   }
 //マッチ度表示
   document.getElementsByClassName("text-center h2 mb-3")[0].innerText = `結果：あなたのマッチ度${count}点`;
+//初めに戻る
+  function frameClick() {
+    document.location.href = "./index.html";
+  };
   </script>
   </body>
 </html>
