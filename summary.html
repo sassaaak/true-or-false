@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-  <title>LSAFit | アルバイトを始める前に知っておこう</title>
+  <title>LSAFit | 働く前に知っておこう</title>
 </head>
 
 <body>
@@ -30,19 +30,19 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">お皿を割っってしまったらその金額を払わなくてはいけない？</th>
+            <th scope="row">お皿を割ってしまったらその金額を払わなくてはいけない？</th>
             <td class="td_1">○</td>
             <td class="td_2">×</td>
           </tr>
           <tr>
             <th scope="row">労働条件を詳しく説明してもらう必要がある</th>
             <td class="td_1">○</td>
-            <td class="td_2">×</td>
+            <td class="td_2">○</td>
           </tr>
           <tr>
             <th scope="row">7時間働いたが休憩は取らなくていい</th>
             <td class="td_1">○</td>
-            <td class="td_2">○</td>
+            <td class="td_2">×</td>
           </tr>
           <tr>
             <th scope="row">急にやめたので給料は支払ってもらえない</th>
@@ -67,7 +67,7 @@
           <tr>
             <th scope="row">アルバイトにも残業手当がでる</th>
             <td class="td_1">○</td>
-            <td class="td_2">×</td>
+            <td class="td_2">○</td>
           </tr>
         </tbody>
       </table>
@@ -88,6 +88,7 @@
       yourAnswer[i] = document.getElementsByClassName("td_1")[i];
       corporateAnswer[i] = document.getElementsByClassName("td_2")[i];
     }
+    
     //パラメータを取得して回答を表示
     function changeanswer(a) {
       if (paramstr[a + 2] == "true") {
@@ -99,11 +100,11 @@
     //スコア計算
     function countscore(c) {
       if (yourAnswer[c].innerText != corporateAnswer[c].innerText) {
-        count -= 14;
+        count -= 12;
       }
     };
     //回答表示
-    for (let n = 0; n <= 6; ++n) {
+    for (let n = 0; n <= 7; ++n) {
       changeanswer(n);
       countscore(n);
     }
@@ -113,6 +114,7 @@
     function frameClick() {
       document.location.href = "./index.html";
     };
+    
   </script>
 </body>
 
